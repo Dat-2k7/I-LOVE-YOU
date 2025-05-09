@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I LOVE YOU</title>
+    <title>Tràn ngập bộ nhớ</title>
     <style>
         body {
             margin: 0;
@@ -18,11 +18,20 @@
         }
         .container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 10px;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
             padding: 20px;
             box-sizing: border-box;
+        }
+        .title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            position: absolute;
+            width: 100%;
+            top: 10px;
+            z-index: 10;
         }
         .media-item {
             background-color: rgba(0, 0, 0, 0.5);
@@ -33,48 +42,45 @@
             justify-content: center;
             overflow: hidden;
         }
-        .media-item img, .media-item video {
+        .media-item video, .media-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 10px;
-            transition: transform 0.3s;
         }
-        .media-item:hover img, .media-item:hover video {
-            transform: scale(1.05);
-        }
-        .music-player {
-            position: absolute;
-            bottom: 20px;
+        .music-control {
+            position: fixed;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
-        }
-        .play-btn {
-            width: 50px;
-            height: 50px;
-            background-color: #ff69b4;
-            border-radius: 50%;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 50px;
+        }
+        .music-control .play-btn {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            mask: url('https://img.icons8.com/ios-filled/50/000000/play--v1.png') no-repeat center;
+            mask-size: cover;
             cursor: pointer;
         }
-        .timer {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 5px;
+        .music-control .disc {
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
         }
-        .title {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
+        .timer {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -86,32 +92,30 @@
     <source src="assets/music/MP4.mp3" type="audio/mp3">
 </audio>
 
-<div class="timer" id="timer"></div>
-
-<div class="music-player">
-    <div class="play-btn" onclick="toggleMusic()">▶️</div>
-</div>
-
 <div class="container">
-    <div class="media-item"><video src="assets/videos/MP2.mp4" controls></video></div>
+    <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
     <div class="media-item"><video src="assets/videos/MP3.mp4" controls></video></div>
     <div class="media-item"><video src="assets/videos/MP5.mp4" controls></video></div>
-    <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Image"></div>
+    <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memories"></div>
 </div>
+
+<div class="music-control">
+    <div class="play-btn" onclick="toggleMusic()"></div>
+    <div class="disc"></div>
+</div>
+
+<div class="timer" id="timer"></div>
 
 <script>
     const bgMusic = document.getElementById("bg-music");
-    const playBtn = document.querySelector(".play-btn");
-    const startDate = new Date("2024-11-16");
     const timer = document.getElementById("timer");
+    const startDate = new Date("2024-11-16");
 
     function toggleMusic() {
         if (bgMusic.paused) {
             bgMusic.play();
-            playBtn.textContent = "⏸️";
         } else {
             bgMusic.pause();
-            playBtn.textContent = "▶️";
         }
     }
 
@@ -126,15 +130,11 @@
     }
 
     setInterval(updateTime, 1000);
-
-    document.querySelectorAll("video").forEach(video => {
-        video.addEventListener("play", () => bgMusic.pause());
-        video.addEventListener("ended", () => bgMusic.play());
-    });
 </script>
 
 </body>
 </html>
+
 
 
 
