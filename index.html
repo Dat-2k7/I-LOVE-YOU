@@ -24,15 +24,6 @@
             padding: 20px;
             box-sizing: border-box;
         }
-        .title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            position: absolute;
-            width: 100%;
-            top: 10px;
-            z-index: 10;
-        }
         .media-item {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 10px;
@@ -48,76 +39,45 @@
             object-fit: cover;
             border-radius: 10px;
         }
-        .music-control {
-            position: fixed;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 50px;
-        }
-        .music-control .play-btn {
-            width: 30px;
-            height: 30px;
-            background-color: #fff;
-            mask: url('https://img.icons8.com/ios-filled/50/000000/play--v1.png') no-repeat center;
-            mask-size: cover;
-            cursor: pointer;
-        }
-        .music-control .disc {
-            width: 50px;
-            height: 50px;
-            background-color: #fff;
-            border-radius: 50%;
-        }
         .timer {
             position: fixed;
             bottom: 15px;
             right: 15px;
             background-color: rgba(0, 0, 0, 0.7);
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+        }
+        @keyframes heart-float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-300px); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff007f;
+            clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
+            animation: heart-float 4s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
 
-<div class="title">I LOVE YOU</div>
-
-<audio id="bg-music" autoplay loop>
-    <source src="assets/music/MP4.mp3" type="audio/mp3">
-</audio>
-
 <div class="container">
     <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
     <div class="media-item"><video src="assets/videos/MP3.mp4" controls></video></div>
-    <div class="media-item"><video src="assets/videos/MP5.mp4" controls></video></div>
+    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memories"></div>
     <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memories"></div>
-</div>
-
-<div class="music-control">
-    <div class="play-btn" onclick="toggleMusic()"></div>
-    <div class="disc"></div>
 </div>
 
 <div class="timer" id="timer"></div>
 
 <script>
-    const bgMusic = document.getElementById("bg-music");
     const timer = document.getElementById("timer");
     const startDate = new Date("2024-11-16");
-
-    function toggleMusic() {
-        if (bgMusic.paused) {
-            bgMusic.play();
-        } else {
-            bgMusic.pause();
-        }
-    }
 
     function updateTime() {
         const now = new Date();
@@ -126,14 +86,25 @@
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        timer.innerHTML = `Tràn ngập bộ nhớ ${days} days ${hours}h ${minutes}m ${seconds}s`;
+        timer.innerHTML = `💖 ${days} ngày ${hours}h ${minutes}m ${seconds}s 💖`;
+    }
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
     }
 
     setInterval(updateTime, 1000);
+    setInterval(createHeart, 800);
 </script>
 
 </body>
 </html>
+
 
 
 
