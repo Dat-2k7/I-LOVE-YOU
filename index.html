@@ -41,7 +41,7 @@
         }
         .timer {
             position: fixed;
-            bottom: 60px;
+            bottom: 100px;
             right: 15px;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 8px 15px;
@@ -59,15 +59,15 @@
             justify-content: center;
         }
         .music-player img {
-            width: 50px;
-            height: 50px;
+            width: 300px;
+            height: 70px;
             cursor: pointer;
         }
         .heart {
             position: absolute;
             width: 30px;
             height: 30px;
-            background-image: url('assets/images/heart.png');
+            background-image: url('assets/images/IMG11.jpg');
             background-size: cover;
             animation: floatHeart 4s ease-in-out infinite;
         }
@@ -81,15 +81,15 @@
 
 <div class="container">
     <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
-    <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
-    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memories"></div>
     <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memories"></div>
+    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memories"></div>
+    <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
 </div>
 
 <div class="timer" id="timer"></div>
 
 <div class="music-player">
-    <img id="playPauseBtn" src="assets/images/play.png" alt="Play">
+    <img id="musicControl" src="assets/images/IMG10.jpg" alt="Music Control">
     <audio id="bgMusic" src="assets/music/MP4.mp3" loop></audio>
 </div>
 
@@ -116,16 +116,14 @@
         setTimeout(() => heart.remove(), 5000);
     }
 
-    const playPauseBtn = document.getElementById("playPauseBtn");
+    const musicControl = document.getElementById("musicControl");
     const bgMusic = document.getElementById("bgMusic");
 
-    playPauseBtn.addEventListener("click", () => {
+    musicControl.addEventListener("click", () => {
         if (bgMusic.paused) {
             bgMusic.play();
-            playPauseBtn.src = "assets/images/pause.png";
         } else {
             bgMusic.pause();
-            playPauseBtn.src = "assets/images/play.png";
         }
     });
 
@@ -135,6 +133,7 @@
 
 </body>
 </html>
+
 
 
 
