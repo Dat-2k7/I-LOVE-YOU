@@ -44,16 +44,16 @@
 
         .timer {
             position: fixed;
-            bottom: 140px;
+            bottom: 110px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 1.2rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 1.1rem;
             font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 0, 127, 0.7);
             z-index: 10;
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.7);
         }
 
         .music-player {
@@ -68,10 +68,10 @@
         }
 
         .music-player img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             cursor: pointer;
-            margin: 0 5px;
+            margin: 0 10px;
         }
 
         .bubble {
@@ -107,10 +107,16 @@
     <img src="assets/images/IMG10.jpg" id="nextBtn" alt="Next">
 </div>
 
-<audio id="bgMusic" src="assets/music/MP5.mp3"></audio>
+<audio id="bgMusic" src="assets/music/MP4.mp3"></audio>
 
 <script>
-    const songs = ["assets/music/MP5.mp3", "assets/music/MP6.mp3", "assets/music/MP7.mp3"];
+    const songs = [
+        "assets/music/MP4.mp3", 
+        "assets/music/MP5.mp3", 
+        "assets/music/MP6.mp3", 
+        "assets/music/MP7.mp3"
+    ];
+    
     let currentSong = 0;
     const bgMusic = document.getElementById("bgMusic");
     const playPauseBtn = document.getElementById("playPauseBtn");
