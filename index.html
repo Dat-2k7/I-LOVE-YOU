@@ -67,11 +67,11 @@
             z-index: 20;
         }
 
-        .music-player img {
-            width: 50px;
-            height: 50px;
+        .music-btn {
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
             cursor: pointer;
-            margin: 0 10px;
         }
 
         .bubble {
@@ -102,21 +102,21 @@
 <div class="timer" id="timer"></div>
 
 <div class="music-player">
-    <img src="assets/images/IMG10.jpg" id="prevBtn" alt="Previous">
-    <img src="assets/images/IMG10.jpg" id="playPauseBtn" alt="Play/Pause">
-    <img src="assets/images/IMG10.jpg" id="nextBtn" alt="Next">
+    <img src="assets/images/prev.png" id="prevBtn" class="music-btn" alt="Previous">
+    <img src="assets/images/play.png" id="playPauseBtn" class="music-btn" alt="Play/Pause">
+    <img src="assets/images/next.png" id="nextBtn" class="music-btn" alt="Next">
 </div>
 
 <audio id="bgMusic" src="assets/music/MP4.mp3"></audio>
 
 <script>
     const songs = [
-        "assets/music/MP4.mp3", 
-        "assets/music/MP5.mp3", 
-        "assets/music/MP6.mp3", 
+        "assets/music/MP4.mp3",
+        "assets/music/MP5.mp3",
+        "assets/music/MP6.mp3",
         "assets/music/MP7.mp3"
     ];
-    
+
     let currentSong = 0;
     const bgMusic = document.getElementById("bgMusic");
     const playPauseBtn = document.getElementById("playPauseBtn");
@@ -135,13 +135,15 @@
         timer.innerHTML = `${days} days ${hours}h ${minutes}m ${seconds}s`;
     }
 
+    setInterval(updateTime, 1000);
+
     function playPauseMusic() {
         if (bgMusic.paused) {
             bgMusic.play();
-            playPauseBtn.src = "assets/images/IMG10.jpg"; 
+            playPauseBtn.src = "assets/images/pause.png";
         } else {
             bgMusic.pause();
-            playPauseBtn.src = "assets/images/IMG10.jpg";
+            playPauseBtn.src = "assets/images/play.png";
         }
     }
 
@@ -149,19 +151,19 @@
         currentSong = (currentSong + 1) % songs.length;
         bgMusic.src = songs[currentSong];
         bgMusic.play();
+        playPauseBtn.src = "assets/images/pause.png";
     }
 
     function playPrevSong() {
         currentSong = (currentSong - 1 + songs.length) % songs.length;
         bgMusic.src = songs[currentSong];
         bgMusic.play();
+        playPauseBtn.src = "assets/images/pause.png";
     }
 
     playPauseBtn.addEventListener("click", playPauseMusic);
     nextBtn.addEventListener("click", playNextSong);
     prevBtn.addEventListener("click", playPrevSong);
-
-    setInterval(updateTime, 1000);
 
     function createBubble() {
         const bubble = document.createElement("div");
