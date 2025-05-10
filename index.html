@@ -19,6 +19,7 @@
         .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
             gap: 15px;
             padding: 20px;
             box-sizing: border-box;
@@ -40,7 +41,7 @@
         }
         .timer {
             position: fixed;
-            bottom: 120px;
+            bottom: 140px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.7);
@@ -60,16 +61,29 @@
             justify-content: center;
             z-index: 20;
         }
-        .music-player .controls {
+        .music-player img {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+        .control-buttons {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             align-items: center;
+        }
+        .control-buttons button {
+            background-color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 50%;
         }
         .heart {
             position: absolute;
             width: 40px;
             height: 40px;
-            background-image: url('assets/images/heart.png');
+            background-image: url('assets/images/IMG11.jpg');
             background-size: cover;
             animation: floatHeart 4s ease-in-out infinite;
         }
@@ -85,20 +99,66 @@
     <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
     <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
     <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memories"></div>
-    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memories"></div>
+    <div class="media-item"><video src="assets/videos/MP5.mp4" controls></video></div>
 </div>
 
 <div class="timer" id="timer"></div>
 
 <div class="music-player">
-    <div class="controls">
+    <div class="control-buttons">
         <button id="prevBtn">⏮️</button>
-        <button id="playPauseBtn">▶️</button>
+        <button id="playPauseBtn">⏯️</button>
         <button id="nextBtn">⏭️</button>
     </div>
 </div>
 
+<audio id="bgMusic" loop></audio>
+
 <script>
+    const musicTracks = [
+        'assets/music/MP4.mp3',
+        'assets/music/MP5.mp3',
+        'assets/music/MP6.mp3',
+        'assets/music/MP7.mp3'
+    ];
+    let currentTrackIndex = 0;
+    const bgMusic = document.getElementById("bgMusic");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function loadTrack(index) {
+        bgMusic.src = musicTracks[index];
+        bgMusic.play();
+    }
+
+    playPauseBtn.addEventListener("click", () => {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            playPauseBtn.textContent = "⏸️";
+        } else {
+            bgMusic.pause();
+            playPauseBtn.textContent = "⏯️";
+        }
+    });
+
+    prevBtn.addEventListener("click", () => {
+        currentTrackIndex = (currentTrackIndex - 1 + musicTracks.length) % musicTracks.length;
+        loadTrack(currentTrackIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+        currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+        loadTrack(currentTrackIndex);
+    });
+
+    bgMusic.addEventListener("ended", () => {
+        currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+        loadTrack(currentTrackIndex);
+    });
+
+    loadTrack(currentTrackIndex);
+
     const timer = document.getElementById("timer");
     const startDate = new Date("2024-11-16");
 
@@ -109,44 +169,26 @@
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        timer.innerHTML = `❤️ ${days} days ${hours}h ${minutes}m ${seconds}s ❤️`;
+        timer.innerHTML = `${days} days ${hours}h ${minutes}m ${seconds}s`;
     }
 
     setInterval(updateTime, 1000);
 
-    const musicFiles = ["assets/music/MP4.mp3", "assets/music/MP5.mp3", "assets/music/MP6.mp3", "assets/music/MP7.mp3"];
-    let currentTrack = 0;
-    const audio = new Audio(musicFiles[currentTrack]);
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
 
-    document.getElementById("playPauseBtn").addEventListener("click", () => {
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-    });
-
-    document.getElementById("nextBtn").addEventListener("click", () => {
-        currentTrack = (currentTrack + 1) % musicFiles.length;
-        audio.src = musicFiles[currentTrack];
-        audio.play();
-    });
-
-    document.getElementById("prevBtn").addEventListener("click", () => {
-        currentTrack = (currentTrack - 1 + musicFiles.length) % musicFiles.length;
-        audio.src = musicFiles[currentTrack];
-        audio.play();
-    });
-
-    audio.addEventListener("ended", () => {
-        currentTrack = (currentTrack + 1) % musicFiles.length;
-        audio.src = musicFiles[currentTrack];
-        audio.play();
-    });
+    setInterval(createHeart, 800);
 </script>
 
 </body>
 </html>
+
 
 
 
