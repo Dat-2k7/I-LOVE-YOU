@@ -45,7 +45,7 @@
 
         .timer {
             position: fixed;
-            bottom: 120px;
+            bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.7);
@@ -55,14 +55,13 @@
             font-weight: bold;
             box-shadow: 0 0 10px rgba(255, 0, 127, 0.7);
             z-index: 10;
-            display: flex;
-            gap: 10px;
         }
 
         .music-player {
             position: fixed;
             bottom: 15px;
-            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -104,9 +103,9 @@
 
 <div class="container">
     <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
-    <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memories"></div>
-    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memories"></div>
     <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
+    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memories"></div>
+    <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memories"></div>
 </div>
 
 <div class="timer" id="timer"></div>
