@@ -44,37 +44,41 @@
         }
 
         .timer {
-            position: absolute;
-            bottom: 120px;
+            position: fixed;
+            bottom: 60px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 10px 20px;
-            border-radius: 30px;
+            border-radius: 20px;
             font-size: 1.2rem;
             font-weight: bold;
-            z-index: 10;
+            white-space: nowrap;
+            z-index: 100;
         }
 
         .music-controls {
-            position: absolute;
-            bottom: 50px;
+            position: fixed;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 15px;
-            z-index: 20;
+            align-items: center;
+            gap: 10px;
+            z-index: 150;
         }
 
         .music-controls button {
-            width: 50px;
-            height: 50px;
-            background-color: #000;
+            background-color: #333;
             color: #fff;
             border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
+            padding: 10px 15px;
+            border-radius: 5px;
             cursor: pointer;
+        }
+
+        .music-controls button:hover {
+            background-color: #555;
         }
 
         .heart {
@@ -83,7 +87,7 @@
             height: 40px;
             background-image: url('assets/images/IMG11.jpg');
             background-size: cover;
-            animation: floatHeart 4s ease-in-out infinite;
+            animation: floatHeart 5s ease-in-out infinite;
         }
 
         @keyframes floatHeart {
@@ -94,6 +98,7 @@
 </head>
 <body>
 
+<!-- Bố cục hình ảnh và video -->
 <div class="container">
     <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
     <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
@@ -101,19 +106,36 @@
     <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memories"></div>
 </div>
 
+<!-- Đồng hồ thời gian yêu nhau -->
 <div class="timer" id="timer"></div>
 
+<!-- Điều khiển âm nhạc -->
 <div class="music-controls">
     <button id="prevBtn">⏮️</button>
     <button id="playPauseBtn">⏯️</button>
     <button id="nextBtn">⏭️</button>
 </div>
 
-<audio id="audioPlayer" src="assets/music/MP4.mp3"></audio>
+<!-- Các bài hát -->
+<audio id="bgMusic" loop></audio>
 
 <script>
     const timer = document.getElementById("timer");
-    const startDate = new Date("2024-11-16");
+    const startDate = new Date("2024-11-16T00:00:00");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const bgMusic = document.getElementById("bgMusic");
+
+    // Danh sách bài hát
+    const playlist = [
+        "assets/music/MP4.mp3",
+        "assets/music/MP5.mp3",
+        "assets/music/MP6.mp3",
+        "assets/music/MP7.mp3"
+    ];
+
+    let currentTrack = 0;
 
     function updateTime() {
         const now = new Date();
@@ -122,54 +144,57 @@
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        timer.innerHTML = `${days} days ${hours}h ${minutes}m ${seconds}s`;
+
+        timer.innerHTML = `${days} days | ${hours}h | ${minutes}m | ${seconds}s`;
     }
+
+    function playMusic() {
+        bgMusic.src = playlist[currentTrack];
+        bgMusic.play();
+        playPauseBtn.textContent = "⏸️";
+    }
+
+    function pauseMusic() {
+        bgMusic.pause();
+        playPauseBtn.textContent = "⏯️";
+    }
+
+    function playPauseToggle() {
+        if (bgMusic.paused) {
+            playMusic();
+        } else {
+            pauseMusic();
+        }
+    }
+
+    function prevTrack() {
+        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        playMusic();
+    }
+
+    function nextTrack() {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        playMusic();
+    }
+
+    playPauseBtn.addEventListener("click", playPauseToggle);
+    prevBtn.addEventListener("click", prevTrack);
+    nextBtn.addEventListener("click", nextTrack);
+
+    bgMusic.addEventListener("ended", nextTrack);
 
     setInterval(updateTime, 1000);
 
-    const audioPlayer = document.getElementById("audioPlayer");
-    const playPauseBtn = document.getElementById("playPauseBtn");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-
-    const musicList = [
-        "assets/music/MP4.mp3",
-        "assets/music/MP5.mp3",
-        "assets/music/MP6.mp3",
-        "assets/music/MP7.mp3"
-    ];
-    
-    let currentTrack = 0;
-
-    function playTrack(index) {
-        audioPlayer.src = musicList[index];
-        audioPlayer.play();
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
     }
 
-    playPauseBtn.addEventListener("click", () => {
-        if (audioPlayer.paused) {
-            audioPlayer.play();
-            playPauseBtn.textContent = "⏸️";
-        } else {
-            audioPlayer.pause();
-            playPauseBtn.textContent = "⏯️";
-        }
-    });
-
-    prevBtn.addEventListener("click", () => {
-        currentTrack = (currentTrack - 1 + musicList.length) % musicList.length;
-        playTrack(currentTrack);
-    });
-
-    nextBtn.addEventListener("click", () => {
-        currentTrack = (currentTrack + 1) % musicList.length;
-        playTrack(currentTrack);
-    });
-
-    audioPlayer.addEventListener("ended", () => {
-        currentTrack = (currentTrack + 1) % musicList.length;
-        playTrack(currentTrack);
-    });
+    setInterval(createHeart, 1500);
 </script>
 
 </body>
