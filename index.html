@@ -41,7 +41,7 @@
         }
         .timer {
             position: fixed;
-            bottom: 15px;
+            bottom: 60px;
             right: 15px;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 8px 15px;
@@ -50,17 +50,30 @@
             font-weight: bold;
             box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
         }
-        @keyframes heart-float {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-300px); opacity: 0; }
+        .music-player {
+            position: fixed;
+            bottom: 15px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .music-player img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
         }
         .heart {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #ff007f; clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
-            clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
-            animation: heart-float 4s ease-in-out infinite;
+            width: 30px;
+            height: 30px;
+            background-image: url('assets/images/heart.png');
+            background-size: cover;
+            animation: floatHeart 4s ease-in-out infinite;
+        }
+        @keyframes floatHeart {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-300px); opacity: 0; }
         }
     </style>
 </head>
@@ -75,6 +88,11 @@
 
 <div class="timer" id="timer"></div>
 
+<div class="music-player">
+    <img id="playPauseBtn" src="assets/images/play.png" alt="Play">
+    <audio id="bgMusic" src="assets/music/MP4.mp3" loop></audio>
+</div>
+
 <script>
     const timer = document.getElementById("timer");
     const startDate = new Date("2024-11-16");
@@ -86,17 +104,30 @@
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        timer.innerHTML = `💖 ${days} ngày ${hours}h ${minutes}m ${seconds}s 💖`;
+        timer.innerHTML = `${days} days ${hours}h ${minutes}m ${seconds}s`;
     }
 
     function createHeart() {
         const heart = document.createElement("div");
         heart.className = "heart";
         heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 5000);
     }
+
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const bgMusic = document.getElementById("bgMusic");
+
+    playPauseBtn.addEventListener("click", () => {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            playPauseBtn.src = "assets/images/pause.png";
+        } else {
+            bgMusic.pause();
+            playPauseBtn.src = "assets/images/play.png";
+        }
+    });
 
     setInterval(updateTime, 1000);
     setInterval(createHeart, 800);
@@ -104,8 +135,6 @@
 
 </body>
 </html>
-
-
 
 
 
