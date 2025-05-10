@@ -13,8 +13,8 @@
             background-size: cover;
             background-position: center;
             font-family: Arial, sans-serif;
-            color: #fff;
             overflow: hidden;
+            color: #fff;
         }
 
         .container {
@@ -33,19 +33,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
 
         .media-item video, .media-item img {
             width: 100%;
-            height: 250px;
+            height: 180px;
             object-fit: cover;
             border-radius: 10px;
         }
 
         .timer {
             position: fixed;
-            bottom: 100px;
+            bottom: 140px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.7);
@@ -68,35 +67,27 @@
             z-index: 20;
         }
 
-        .control-buttons {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .control-buttons button {
-            background-color: #fff;
-            border: none;
-            padding: 8px;
+        .music-player img {
+            width: 60px;
+            height: 60px;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 50%;
+            margin: 0 5px;
         }
 
-        .heart {
+        .bubble {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             background-image: url('assets/images/IMG11.jpg');
-            background-size: cover;
-            animation: floatHeart 4s ease-in-out infinite;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: floatBubble 4s ease-in-out infinite;
         }
 
-        @keyframes floatHeart {
+        @keyframes floatBubble {
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-300px); opacity: 0; }
         }
-
     </style>
 </head>
 <body>
@@ -104,68 +95,27 @@
 <div class="container">
     <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
     <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
-    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memories"></div>
-    <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memories"></div>
+    <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Image 1"></div>
+    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Image 2"></div>
 </div>
 
 <div class="timer" id="timer"></div>
 
 <div class="music-player">
-    <div class="control-buttons">
-        <button id="prevBtn">⏮️</button>
-        <button id="playPauseBtn">⏯️</button>
-        <button id="nextBtn">⏭️</button>
-    </div>
+    <img src="assets/images/IMG10.jpg" id="prevBtn" alt="Previous">
+    <img src="assets/images/IMG10.jpg" id="playPauseBtn" alt="Play/Pause">
+    <img src="assets/images/IMG10.jpg" id="nextBtn" alt="Next">
 </div>
 
-<audio id="bgMusic" loop></audio>
+<audio id="bgMusic" src="assets/music/MP5.mp3"></audio>
 
 <script>
-    const musicTracks = [
-        'assets/music/MP4.mp3',
-        'assets/music/MP5.mp3',
-        'assets/music/MP6.mp3',
-        'assets/music/MP7.mp3'
-    ];
-    let currentTrackIndex = 0;
+    const songs = ["assets/music/MP5.mp3", "assets/music/MP6.mp3", "assets/music/MP7.mp3"];
+    let currentSong = 0;
     const bgMusic = document.getElementById("bgMusic");
     const playPauseBtn = document.getElementById("playPauseBtn");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
-
-    function loadTrack(index) {
-        bgMusic.src = musicTracks[index];
-        bgMusic.play();
-        playPauseBtn.textContent = "⏸️";
-    }
-
-    playPauseBtn.addEventListener("click", () => {
-        if (bgMusic.paused) {
-            bgMusic.play();
-            playPauseBtn.textContent = "⏸️";
-        } else {
-            bgMusic.pause();
-            playPauseBtn.textContent = "⏯️";
-        }
-    });
-
-    prevBtn.addEventListener("click", () => {
-        currentTrackIndex = (currentTrackIndex - 1 + musicTracks.length) % musicTracks.length;
-        loadTrack(currentTrackIndex);
-    });
-
-    nextBtn.addEventListener("click", () => {
-        currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
-        loadTrack(currentTrackIndex);
-    });
-
-    bgMusic.addEventListener("ended", () => {
-        currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
-        loadTrack(currentTrackIndex);
-    });
-
-    loadTrack(currentTrackIndex);
-
     const timer = document.getElementById("timer");
     const startDate = new Date("2024-11-16");
 
@@ -176,21 +126,47 @@
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        timer.innerHTML = `${days} days | ${hours}h | ${minutes}m | ${seconds}s`;
+        timer.innerHTML = `${days} days ${hours}h ${minutes}m ${seconds}s`;
     }
+
+    function playPauseMusic() {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            playPauseBtn.src = "assets/images/IMG10.jpg"; 
+        } else {
+            bgMusic.pause();
+            playPauseBtn.src = "assets/images/IMG10.jpg";
+        }
+    }
+
+    function playNextSong() {
+        currentSong = (currentSong + 1) % songs.length;
+        bgMusic.src = songs[currentSong];
+        bgMusic.play();
+    }
+
+    function playPrevSong() {
+        currentSong = (currentSong - 1 + songs.length) % songs.length;
+        bgMusic.src = songs[currentSong];
+        bgMusic.play();
+    }
+
+    playPauseBtn.addEventListener("click", playPauseMusic);
+    nextBtn.addEventListener("click", playNextSong);
+    prevBtn.addEventListener("click", playPrevSong);
 
     setInterval(updateTime, 1000);
 
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
+    function createBubble() {
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.style.left = Math.random() * window.innerWidth + "px";
+        bubble.style.animationDuration = 3 + Math.random() * 2 + "s";
+        document.body.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 4000);
     }
 
-    setInterval(createHeart, 800);
+    setInterval(createBubble, 1200);
 </script>
 
 </body>
