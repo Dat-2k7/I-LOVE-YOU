@@ -5,53 +5,190 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I LOVE YOU</title>
-    
-    <!-- Liên kết đến tệp CSS -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('assets/images/IMG9.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .media-item {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .media-item video, .media-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .timer {
+            position: fixed;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .music-controls {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 20;
+        }
+
+        .music-controls button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-image: url('assets/images/IMG11.jpg');
+            background-size: cover;
+            animation: floatHeart 5s ease-in-out infinite;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-300px); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Trang 1 - Màn hình chào mừng -->
-<div id="page1" class="page">
-    <div class="welcome-container">
-        <h1>Happy Birthday</h1>
-        <div class="date-box">07 - 06 - 2007</div>
-        <div class="message-box">Đủ tuổi để làm mẹ rùi :)))</div>
-        <div class="image-container">
-            <img src="assets/images/IMG3.jpg" alt="Person" class="person-image">
-        </div>
-        <div class="name-tag">Nguyễn Phương Ly</div>
-        <button id="goToPage2">Go to Page 2</button>
-    </div>
+<div class="container">
+    <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
+    <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
+    <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memory 1"></div>
+    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memory 2"></div>
 </div>
 
-<!-- Trang 2 - Phần chính -->
-<div id="page2" class="page hidden">
-    <div class="container">
-        <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
-        <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
-        <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memory 1"></div>
-        <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memory 2"></div>
-    </div>
+<!-- Đồng hồ thời gian -->
+<div class="timer" id="timer"></div>
 
-    <!-- Đồng hồ thời gian -->
-    <div class="timer" id="timer"></div>
-
-    <!-- Điều khiển nhạc -->
-    <div class="music-controls">
-        <button id="prevBtn">⏮️</button>
-        <button id="playPauseBtn" class="play-pause"></button>
-        <button id="nextBtn">⏭️</button>
-    </div>
-
-    <!-- Audio -->
-    <audio id="bgMusic" loop></audio>
-
-    <button id="goToPage1">Go to Page 1</button>
+<!-- Điều khiển nhạc -->
+<div class="music-controls">
+    <button id="prevBtn">⏮️</button>
+    <button id="playPauseBtn" class="play-pause">▶️</button>
+    <button id="nextBtn">⏭️</button>
 </div>
 
-<!-- Liên kết đến tệp JavaScript -->
-<script src="assets/js/script.js"></script>
+<!-- Audio -->
+<audio id="bgMusic" loop>
+    <source src="assets/music/MP4.mp3" type="audio/mp3">
+    <source src="assets/music/MP5.mp3" type="audio/mp3">
+    <source src="assets/music/MP6.mp3" type="audio/mp3">
+    <source src="assets/music/MP7.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    const timer = document.getElementById("timer");
+    const startDate = new Date("2024-11-16T00:00:00");
+
+    function updateTime() {
+        const now = new Date();
+        const diff = now - startDate;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        timer.innerHTML = `${days} days | ${hours}h | ${minutes}m | ${seconds}s`;
+    }
+
+    setInterval(updateTime, 1000);
+
+    const bgMusic = document.getElementById("bgMusic");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let isPlaying = false;
+    let currentTrack = 0;
+    const tracks = [
+        "assets/music/MP4.mp3",
+        "assets/music/MP5.mp3",
+        "assets/music/MP6.mp3",
+        "assets/music/MP7.mp3"
+    ];
+
+    function playMusic() {
+        bgMusic.src = tracks[currentTrack];
+        bgMusic.play();
+        isPlaying = true;
+        playPauseBtn.innerHTML = "⏸️";
+    }
+
+    function pauseMusic() {
+        bgMusic.pause();
+        isPlaying = false;
+        playPauseBtn.innerHTML = "▶️";
+    }
+
+    playPauseBtn.addEventListener("click", () => {
+        isPlaying ? pauseMusic() : playMusic();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+        playMusic();
+    });
+
+    nextBtn.addEventListener("click", () => {
+        currentTrack = (currentTrack + 1) % tracks.length;
+        playMusic();
+    });
+
+    bgMusic.addEventListener("ended", () => {
+        nextBtn.click();
+    });
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+
+    setInterval(createHeart, 1000);
+</script>
 
 </body>
 </html>
