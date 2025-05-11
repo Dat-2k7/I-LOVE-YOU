@@ -4,163 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #fce4ec;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-        }
-
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            background-color: #f8bbd0;
-            background-image: url('assets/images/grid.png');
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card {
-            position: relative;
-            width: 80%;
-            max-width: 600px;
-            background-color: #fff;
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .header {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #ec407a;
-            margin-bottom: 20px;
-        }
-
-        .birthday-date {
-            background-color: #ec407a;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            display: inline-block;
-            font-size: 1rem;
-            margin-bottom: 10px;
-        }
-
-        .funny-note {
-            background-color: #f06292;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
-
-        .profile-picture {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background-color: #eee;
-            overflow: hidden;
-            margin: 0 auto 15px;
-            border: 5px solid #ec407a;
-        }
-
-        .profile-picture img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .name {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ec407a;
-            background-color: #ffe4e1;
-            padding: 5px 15px;
-            border-radius: 15px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .decorations {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .balloon, .smile, .flag {
-            position: absolute;
-            animation: float 6s infinite;
-        }
-
-        .balloon {
-            width: 40px;
-            height: 60px;
-            background-color: #f48fb1;
-            border-radius: 50%;
-        }
-
-        .smile {
-            width: 30px;
-            height: 30px;
-            background-color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .flag {
-            width: 50px;
-            height: 50px;
-            background-color: #ec407a;
-            clip-path: polygon(0 0, 100% 50%, 0 100%);
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
-        }
-
-    </style>
+    <title>I LOVE YOU</title>
+    
+    <!-- Liên kết đến tệp CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-<div class="container">
-    <div class="card">
-        <div class="header">Happy Birthday</div>
-        <div class="birthday-date">07-06- 2007</div>
-        <div class="funny-note">Đủ tuổi làm mẹ rùi :)))</div>
-
-        <div class="profile-picture">
-            <img src="assets/images/birthday.jpg" alt="Profile Picture">
+<!-- Trang 1 - Màn hình chào mừng -->
+<div id="page1" class="page">
+    <div class="welcome-container">
+        <h1>Happy Birthday</h1>
+        <div class="date-box">07 - 06 - 2007</div>
+        <div class="message-box">Đủ tuổi để làm mẹ rùi :)))</div>
+        <div class="image-container">
+            <img src="assets/images/IMG3.jpg" alt="Person" class="person-image">
         </div>
-
-        <div class="name">Nguyễn Phương Ly - Heo</div>
-    </div>
-
-    <!-- Trang trí -->
-    <div class="decorations">
-        <div class="balloon" style="top: 20px; left: 20px;"></div>
-        <div class="balloon" style="top: 150px; right: 50px;"></div>
-        <div class="smile" style="bottom: 80px; left: 50%; transform: translateX(-50%);">😊</div>
-        <div class="flag" style="top: 10px; left: 50%; transform: translateX(-50%);"></div>
+        <div class="name-tag">Nguyễn Phương Ly</div>
+        <button id="goToPage2">Go to Page 2</button>
     </div>
 </div>
+
+<!-- Trang 2 - Phần chính -->
+<div id="page2" class="page hidden">
+    <div class="container">
+        <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
+        <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
+        <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memory 1"></div>
+        <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memory 2"></div>
+    </div>
+
+    <!-- Đồng hồ thời gian -->
+    <div class="timer" id="timer"></div>
+
+    <!-- Điều khiển nhạc -->
+    <div class="music-controls">
+        <button id="prevBtn">⏮️</button>
+        <button id="playPauseBtn" class="play-pause"></button>
+        <button id="nextBtn">⏭️</button>
+    </div>
+
+    <!-- Audio -->
+    <audio id="bgMusic" loop></audio>
+
+    <button id="goToPage1">Go to Page 1</button>
+</div>
+
+<!-- Liên kết đến tệp JavaScript -->
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>
