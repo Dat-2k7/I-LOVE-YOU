@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +41,7 @@
 
         .timer {
             position: fixed;
-            bottom: 160px;
+            bottom: 150px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(0, 0, 0, 0.7);
@@ -55,7 +54,7 @@
 
         .music-controls {
             position: fixed;
-            bottom: 20px;
+            bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -72,14 +71,6 @@
             border-radius: 50%;
             cursor: pointer;
             font-size: 18px;
-        }
-
-        .music-controls .play-pause::before {
-            content: "▶️";
-        }
-
-        .music-controls .pause::before {
-            content: "⏸️";
         }
 
         .heart {
@@ -112,7 +103,7 @@
 <!-- Điều khiển nhạc -->
 <div class="music-controls">
     <button id="prevBtn">⏮️</button>
-    <button id="playPauseBtn" class="play-pause"></button>
+    <button id="playPauseBtn" class="play-pause">▶️</button>
     <button id="nextBtn">⏭️</button>
 </div>
 
@@ -160,15 +151,13 @@
         bgMusic.src = tracks[currentTrack];
         bgMusic.play();
         isPlaying = true;
-        playPauseBtn.classList.remove("play-pause");
-        playPauseBtn.classList.add("pause");
+        playPauseBtn.innerHTML = "⏸️";
     }
 
     function pauseMusic() {
         bgMusic.pause();
         isPlaying = false;
-        playPauseBtn.classList.remove("pause");
-        playPauseBtn.classList.add("play-pause");
+        playPauseBtn.innerHTML = "▶️";
     }
 
     playPauseBtn.addEventListener("click", () => {
@@ -203,7 +192,6 @@
 
 </body>
 </html>
-
 
 
 
