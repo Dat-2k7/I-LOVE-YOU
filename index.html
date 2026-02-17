@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE LAST CHAPTER</title>
     <style>
+        :root {
+            --avocado-green: #d4e09b;
+            --neon-blue: #00cec9;
+            --dark-bg: #1e272e;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            /* Nền trái tim tan vỡ/đen */
-            background: #000 url('https://images.unsplash.com/photo-1518112391480-98316dabc812?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-            background-size: cover;
+            background-color: var(--avocado-green);
+            background-image: url('https://img.freepik.com/free-vector/cute-sad-avocado-cartoon-vector-icon-illustration-food-nature-icon-concept-isolated-premium-flat_138676-4198.jpg');
+            background-size: 100px;
             font-family: 'Arial', sans-serif;
-            color: #e0e0e0;
             overflow-x: hidden;
             min-height: 100vh;
         }
@@ -20,7 +25,7 @@
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Làm tối nền để nổi bật nội dung */
+            background: rgba(212, 224, 155, 0.9);
             z-index: 0;
         }
 
@@ -29,83 +34,109 @@
             z-index: 1;
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px;
+            padding-bottom: 250px;
             text-align: center;
         }
 
         .thank-you-message {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 20px;
             line-height: 1.6;
-            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 150px;
+            gap: 10px;
         }
 
-        .media-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px;
-            border-radius: 10px;
-        }
-
-        .media-item video, .media-item img {
+        .media-item img, .media-item video {
             width: 100%;
-            height: 180px;
+            height: 160px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 10px;
+            border: 2px solid white;
         }
 
+        /* --- PHẦN TIMELINE --- */
         .timeline-box {
             position: fixed;
-            bottom: 130px;
+            bottom: 120px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px 30px;
-            border-radius: 10px;
-            border: 1px solid #444;
-            text-align: center;
             z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 15px;
             width: 80%;
-            max-width: 400px;
+            max-width: 300px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .timeline-box div {
-            margin: 5px 0;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .begin { color: #81a1c1; }
-        .end { color: #bf616a; }
-
+        /* --- THAY ĐỔI NÚT BẤM (NEON STYLE) --- */
         .music-controls {
             position: fixed;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
-            z-index: 20;
+            align-items: center;
+            gap: 25px;
+            z-index: 100;
+            background: #2d3436;
+            padding: 15px 30px;
+            border-radius: 60px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
 
-        .music-controls button {
+        .btn-neon {
             background: #222;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 12px;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: inset 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .btn-neon:hover {
+            background: var(--neon-blue);
+            color: #fff;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        #playBtn {
+            width: 65px;
+            height: 65px;
+            font-size: 24px;
+        }
+
+        /* Hiệu ứng trái tim vỡ đen bay lên */
+        .broken-heart {
+            position: fixed;
+            bottom: -50px;
             font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+            filter: grayscale(100%);
+            animation: flyUp linear forwards;
+        }
+
+        @keyframes flyUp {
+            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -115,7 +146,7 @@
 
 <div class="content">
     <div class="thank-you-message">
-        Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔
+        Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔. Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc, tìm được người xứng đáng biết trân trọng em hơn anh nhé!!!
     </div>
 
     <div class="container">
@@ -127,17 +158,14 @@
 </div>
 
 <div class="timeline-box">
-    <div class="begin">The begin: 16/11/2024</div>
-    <div class="end">
-        The end: 28/12/2025<br>
-        <small>(Cả lịch dương và âm đều đặc biệt)</small>
-    </div>
+    <div style="color: #588157;">The begin: 16/11/2024</div>
+    <div style="color: #bc4749;">The end: 28/12/2025 (Cả lịch dương và âm đều đặc biệt)></div>
 </div>
 
 <div class="music-controls">
-    <button onclick="prevTrack()">⏮️</button>
-    <button id="playBtn" onclick="togglePlay()">▶️</button>
-    <button onclick="nextTrack()">⏭️</button>
+    <div class="btn-neon" onclick="prevTrack()">❮❮</div>
+    <div class="btn-neon" id="playBtn" onclick="togglePlay()">▶</div>
+    <div class="btn-neon" onclick="nextTrack()">❯❯</div>
 </div>
 
 <audio id="bgMusic" onended="nextTrack()">
@@ -147,19 +175,16 @@
 <script>
     const music = document.getElementById("bgMusic");
     const playBtn = document.getElementById("playBtn");
-    const tracks = [
-        "assets/music/MP4.mp3",
-        "assets/music/MP5.mp3",
-     ];
+    const tracks = ["assets/music/MP4.mp3"];
     let currentTrack = 0;
 
     function togglePlay() {
         if (music.paused) {
             music.play();
-            playBtn.innerHTML = "⏸️";
+            playBtn.innerHTML = "||"; // Ký tự tạm cho Pause
         } else {
             music.pause();
-            playBtn.innerHTML = "▶️";
+            playBtn.innerHTML = "▶";
         }
     }
 
@@ -167,7 +192,7 @@
         currentTrack = index;
         music.src = tracks[currentTrack];
         music.play();
-        playBtn.innerHTML = "⏸️";
+        playBtn.innerHTML = "||";
     }
 
     function nextTrack() {
@@ -179,6 +204,17 @@
         currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
         loadTrack(currentTrack);
     }
+
+    function createBrokenHeart() {
+        const heart = document.createElement("div");
+        heart.className = "broken-heart";
+        heart.innerHTML = "💔"; 
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createBrokenHeart, 600);
 </script>
 
 </body>
