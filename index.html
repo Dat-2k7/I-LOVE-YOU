@@ -6,17 +6,17 @@
     <title>THE LAST CHAPTER</title>
     <style>
         :root {
-            --avocado-green: #d4e09b;
-            --neon-blue: #00cec9;
-            --dark-bg: #1e272e;
+            --neon-cyan: #00cec9;
+            --sad-red: #ff7675;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--avocado-green);
+            /* Nền bơ buồn lặp lại */
+            background-color: #d4e09b;
             background-image: url('https://img.freepik.com/free-vector/cute-sad-avocado-cartoon-vector-icon-illustration-food-nature-icon-concept-isolated-premium-flat_138676-4198.jpg');
-            background-size: 100px;
+            background-size: 120px;
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
@@ -25,7 +25,7 @@
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(212, 224, 155, 0.9);
+            background: rgba(212, 224, 155, 0.88); 
             z-index: 0;
         }
 
@@ -35,50 +35,79 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            padding-bottom: 250px;
+            padding-bottom: 280px; /* Chừa chỗ cho timeline và controls */
             text-align: center;
         }
 
         .thank-you-message {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 25px;
             border-radius: 20px;
             line-height: 1.6;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-size: 1.05rem;
             margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
+        /* Bố cục 2 cột giữ nguyên như ban đầu */
         .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        .media-item img, .media-item video {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid white;
-        }
-
-        /* --- PHẦN TIMELINE --- */
-        .timeline-box {
-            position: fixed;
-            bottom: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px 20px;
-            border-radius: 15px;
-            width: 80%;
-            max-width: 300px;
+        .media-item {
+            background: #fff;
+            padding: 5px;
+            border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* --- THAY ĐỔI NÚT BẤM (NEON STYLE) --- */
+        .media-item video, .media-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Timeline Box */
+        .timeline-box {
+            position: fixed;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px;
+            border-radius: 15px;
+            width: 85%;
+            max-width: 380px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #a3b18a;
+        }
+
+        .timeline-box div { margin: 5px 0; font-weight: bold; }
+        .begin { color: #588157; }
+        .end { color: #bc4749; }
+
+        /* Mood Label */
+        .mood-label {
+            position: fixed;
+            bottom: 105px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #2d3436;
+        }
+
+        /* Nút âm thanh Neon Cyan */
         .music-controls {
             position: fixed;
             bottom: 30px;
@@ -86,57 +115,52 @@
             transform: translateX(-50%);
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 20px;
             z-index: 100;
-            background: #2d3436;
-            padding: 15px 30px;
-            border-radius: 60px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            background: #1e272e;
+            padding: 12px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .btn-neon {
-            background: #222;
-            border: 2px solid var(--neon-blue);
-            color: var(--neon-blue);
-            width: 50px;
-            height: 50px;
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: inset 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
-            font-size: 18px;
+            transition: 0.3s;
+            box-shadow: 0 0 10px var(--neon-cyan), inset 0 0 5px var(--neon-cyan);
             font-weight: bold;
         }
 
         .btn-neon:hover {
-            background: var(--neon-blue);
+            background: var(--neon-cyan);
             color: #fff;
-            box-shadow: 0 0 20px var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-cyan);
         }
 
-        #playBtn {
-            width: 65px;
-            height: 65px;
-            font-size: 24px;
-        }
+        #playBtn { width: 55px; height: 55px; font-size: 22px; }
 
-        /* Hiệu ứng trái tim vỡ đen bay lên */
+        /* Trái tim vỡ màu ĐỎ bay lên */
         .broken-heart {
             position: fixed;
             bottom: -50px;
-            font-size: 20px;
+            font-size: 22px;
             user-select: none;
             pointer-events: none;
-            z-index: 0;
-            filter: grayscale(100%);
+            z-index: 2;
             animation: flyUp linear forwards;
         }
 
         @keyframes flyUp {
-            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -158,14 +182,17 @@
 </div>
 
 <div class="timeline-box">
-    <div style="color: #588157;">The begin: 16/11/2024</div>
-    <div style="color: #bc4749;">The end: 28/12/2025 (Cả lịch dương và âm đều đặc biệt)></div>
+    <div class="begin">The begin: 16/11/2024</div>
+    <div class="end">The end: 28/12/2025</div>
+    <div style="font-size: 0.85rem; color: #666;">(Cả dương và âm đều đặc biệt)</div>
 </div>
 
+<div class="mood-label">Mood: Sad Lofi 😟</div>
+
 <div class="music-controls">
-    <div class="btn-neon" onclick="prevTrack()">❮❮</div>
-    <div class="btn-neon" id="playBtn" onclick="togglePlay()">▶</div>
-    <div class="btn-neon" onclick="nextTrack()">❯❯</div>
+    <button class="btn-neon" onclick="prevTrack()">❮</button>
+    <button class="btn-neon" id="playBtn" onclick="togglePlay()">▶</button>
+    <button class="btn-neon" onclick="nextTrack()">❯</button>
 </div>
 
 <audio id="bgMusic" onended="nextTrack()">
@@ -175,13 +202,13 @@
 <script>
     const music = document.getElementById("bgMusic");
     const playBtn = document.getElementById("playBtn");
-    const tracks = ["assets/music/MP4.mp3"];
+    const tracks = ["assets/music/MP4.mp3", "assets/music/MP5.mp3"];
     let currentTrack = 0;
 
     function togglePlay() {
         if (music.paused) {
             music.play();
-            playBtn.innerHTML = "||"; // Ký tự tạm cho Pause
+            playBtn.innerHTML = "||";
         } else {
             music.pause();
             playBtn.innerHTML = "▶";
@@ -201,21 +228,4 @@
     }
 
     function prevTrack() {
-        currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-        loadTrack(currentTrack);
-    }
-
-    function createBrokenHeart() {
-        const heart = document.createElement("div");
-        heart.className = "broken-heart";
-        heart.innerHTML = "💔"; 
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 7000);
-    }
-    setInterval(createBrokenHeart, 600);
-</script>
-
-</body>
-</html>
+        currentTrack = (currentTrack - 1 + tracks.length) % tracks.length
