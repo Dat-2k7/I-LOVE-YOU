@@ -13,9 +13,9 @@
         body {
             margin: 0;
             padding: 0;
-            /* Nền bơ buồn lặp lại */
+            /* Sửa đường dẫn ảnh bơ theo file bạn đã up */
             background-color: #d4e09b;
-            background-image: url('assets/Gemini_Generated_Image_k1negnk1negnk1ne.png');
+            background-image: url('Gemini_Generated_Image_k1negnk1negnk1ne.png');
             background-size: 220px;
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
@@ -25,7 +25,8 @@
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(212, 224, 155, 0.88); 
+            /* Làm lớp phủ nhạt hơn một chút để thấy rõ bơ */
+            background: rgba(212, 224, 155, 0.75); 
             z-index: 0;
         }
 
@@ -35,19 +36,18 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            padding-bottom: 280px; 
+            padding-bottom: 300px;
             text-align: center;
         }
 
         .thank-you-message {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             padding: 25px;
             border-radius: 20px;
             line-height: 1.6;
             font-size: 1.05rem;
             margin-bottom: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .container {
@@ -73,41 +73,37 @@
 
         .timeline-box {
             position: fixed;
-            bottom: 150px;
+            bottom: 160px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
             border-radius: 15px;
             width: 85%;
-            max-width: 380px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid #a3b18a;
+            max-width: 350px;
             text-align: center;
+            border: 1px solid #a3b18a;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-
-        .timeline-box div { margin: 5px 0; font-weight: bold; }
-        .begin { color: #588157; }
-        .end { color: #bc4749; }
 
         .mood-label {
             position: fixed;
-            bottom: 105px;
+            bottom: 125px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 20;
-            background: rgba(255, 255, 255, 0.8);
+            background: #fff;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
-            color: #2d3436;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .music-controls {
             position: fixed;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -117,7 +113,6 @@
             background: #1e272e;
             padding: 12px 25px;
             border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .btn-neon {
@@ -132,14 +127,7 @@
             justify-content: center;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 0 10px var(--neon-cyan), inset 0 0 5px var(--neon-cyan);
-            font-weight: bold;
-        }
-
-        .btn-neon:hover {
-            background: var(--neon-cyan);
-            color: #fff;
-            box-shadow: 0 0 20px var(--neon-cyan);
+            box-shadow: 0 0 10px var(--neon-cyan);
         }
 
         #playBtn { width: 55px; height: 55px; font-size: 22px; }
@@ -147,7 +135,7 @@
         .broken-heart {
             position: fixed;
             bottom: -50px;
-            font-size: 22px;
+            font-size: 24px;
             user-select: none;
             pointer-events: none;
             z-index: 2;
@@ -155,8 +143,7 @@
         }
 
         @keyframes flyUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -166,50 +153,49 @@
 
 <div class="content">
     <div class="thank-you-message">
-        Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔. Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc, tìm được người xứng đáng biết trân trọng em hơn anh nhé!!! 
+        Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔. Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc, tìm được người xứng đáng biết trân trọng em hơn anh nhé!!!
     </div>
 
     <div class="container">
         <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
         <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
-        <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memory 1"></div>
-        <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memory 2"></div>
+        <div class="media-item"><img src="assets/images/IMG1.jpg"></div>
+        <div class="media-item"><img src="assets/images/IMG2.jpg"></div>
     </div>
 </div>
 
 <div class="timeline-box">
-    <div class="begin">The begin: 16/11/2024</div>
-    <div class="end">The end: 28/12/2025</div>
-    <div style="font-size: 0.85rem; color: #666;">(Cả dương và âm đều đặc biệt)</div>
+    <div style="color: #588157;">The begin: 16/11/2024</div>
+    <div style="color: #bc4749;">The end: 28/12/2025</div>
+    <div style="font-size: 0.8rem; color: #666;">(Cả dương và âm đều đặc biệt)</div>
 </div>
 
 <div class="mood-label">Mood: Sad Lofi 😟</div>
 
 <div class="music-controls">
-    <button class="btn-neon" onclick="prevTrack()">❮</button>
-    <button class="btn-neon" id="playBtn" onclick="togglePlay()">▶</button>
-    <button class="btn-neon" onclick="nextTrack()">❯</button>
+    <div class="btn-neon" onclick="prevTrack()">❮</div>
+    <div class="btn-neon" id="playBtn" onclick="togglePlay()">▶</div>
+    <div class="btn-neon" onclick="nextTrack()">❯</div>
 </div>
 
-<audio id="bgMusic" onended="nextTrack()">
-    <source src="assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a" type="audio/mp4">
-</audio>
+<audio id="bgMusic" onended="nextTrack()"></audio>
 
 <script>
     const music = document.getElementById("bgMusic");
     const playBtn = document.getElementById("playBtn");
-    
-    // Danh sách nhạc
+
+    // LƯU Ý: Tên file phải khớp 100% với trên GitHub của bạn
     const tracks = [
-        "assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a",
-        "assets/music/QUANG ĐĂNG TRẦN - ANH ĐÃ KHÔNG BIẾT CÁCH YÊU EM _ Official Lyrics Video.mp3"
+        "Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a",
+        "QUANG ĐĂNG TRẦN - ANH ĐÃ KHÔNG BIẾT CÁCH YÊU EM _ Official Lyrics Video.mp3"
     ];
-    
+
     let currentTrack = 0;
+    music.src = tracks[currentTrack];
 
     function togglePlay() {
         if (music.paused) {
-            music.play();
+            music.play().catch(e => console.log("Trình duyệt chặn tự động phát. Hãy nhấn Play lần nữa."));
             playBtn.innerHTML = "||";
         } else {
             music.pause();
@@ -234,18 +220,16 @@
         loadTrack(currentTrack);
     }
 
-    // Tạo trái tim vỡ màu đỏ bay lên
     function createBrokenHeart() {
         const heart = document.createElement("div");
         heart.className = "broken-heart";
         heart.innerHTML = "💔"; 
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 7000);
+        setTimeout(() => heart.remove(), 6000);
     }
-    
-    setInterval(createBrokenHeart, 600);
+    setInterval(createBrokenHeart, 500);
 </script>
 
 </body>
