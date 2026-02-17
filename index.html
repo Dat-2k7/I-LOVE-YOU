@@ -13,9 +13,9 @@
             margin: 0;
             padding: 0;
             background-color: #d4e09b;
-            /* Cập nhật ảnh bơ theo tên mới và thông số bạn đưa */
+            /* Gọi ảnh bơ 928x1120 bạn đã up */
             background-image: url('background.png');
-            background-size: 250px auto; /* Kích thước bơ hiển thị tối ưu */
+            background-size: 250px auto; 
             background-repeat: repeat;
             background-attachment: fixed;
             font-family: 'Arial', sans-serif;
@@ -26,7 +26,6 @@
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Độ mờ 0.2 giúp ảnh bơ hiện rõ nét tinh thần Sad Lofi */
             background: rgba(212, 224, 155, 0.2); 
             z-index: 0;
             pointer-events: none;
@@ -114,7 +113,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.3s;
             box-shadow: 0 0 10px var(--neon-cyan);
         }
 
@@ -127,11 +125,13 @@
             user-select: none;
             pointer-events: none;
             z-index: 2;
+            /* Đã sửa animation để không bị ngược */
             animation: flyUp linear forwards;
         }
 
         @keyframes flyUp {
-            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
         }
     </style>
 </head>
@@ -141,7 +141,7 @@
 
 <div class="content">
     <div class="thank-you-message">
-        Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔. Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc, tìm được người xứng đáng biết trân trọng em hơn anh nhé!!!
+        Cảm ơn Heo đã cho anh biết thế nào là yêu... Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc!!! 😔💔
     </div>
 
     <div class="container">
@@ -169,8 +169,7 @@
     const music = document.getElementById("bgMusic");
     const playBtn = document.getElementById("playBtn");
 
-    // Danh sách nhạc chạy MP8 trước, sau đó tới MP9
-    // Đảm bảo file MP8.mp3 và MP9.m4a nằm trong thư mục assets/music/
+    // Thứ tự: MP8 trước, MP9 sau
     const tracks = [
         "assets/music/MP8.mp3",
         "assets/music/MP9.m4a"
@@ -185,7 +184,7 @@
             music.play().then(() => {
                 playBtn.innerHTML = "||";
             }).catch(err => {
-                console.log("Trình duyệt chặn autoplay. Nhấn Play để nghe nhạc.");
+                alert("Hãy bấm vào màn hình một lần để kích hoạt nhạc!");
             });
         } else {
             music.pause();
@@ -210,7 +209,7 @@
         loadTrack(currentTrack);
     }
 
-    // Hiệu ứng tim tan vỡ bay lên
+    // Hiệu ứng tim bay (đã chỉnh hướng xuôi)
     setInterval(() => {
         const heart = document.createElement("div");
         heart.className = "broken-heart";
