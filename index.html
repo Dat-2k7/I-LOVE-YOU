@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE LAST CHAPTER</title>
     <style>
-        :root { --neon-cyan: #00cec9; }
+        :root {
+            --neon-cyan: #00cec9;
+        }
 
         body {
-            margin: 0; padding: 0;
+            margin: 0;
+            padding: 0;
             background-color: #d4e09b;
-            background-image: url('https://img.freepik.com/premium-vector/avocado-kawaii-vector-seamless-pattern-stylized-vector-character-with-smiling-face-hands-legs_822686-2324.jpg?w=360'); /* Đảm bảo file ở thư mục gốc */
-            background-size: 250px auto;
+            /* Sử dụng link ảnh bơ Freepik để đảm bảo luôn hiển thị */
+            background-image: url('https://img.freepik.com/premium-vector/avocado-kawaii-vector-seamless-pattern-stylized-vector-character-with-smiling-face-hands-legs_822686-2324.jpg?w=360');
+            background-size: 200px auto; 
             background-repeat: repeat;
             background-attachment: fixed;
             font-family: 'Arial', sans-serif;
@@ -20,76 +24,133 @@
         }
 
         .overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(212, 224, 155, 0.2); 
-            z-index: 0; pointer-events: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(212, 224, 155, 0.15); 
+            z-index: 0;
+            pointer-events: none;
         }
 
         .content {
-            position: relative; z-index: 1;
-            max-width: 800px; margin: 0 auto; padding: 20px;
-            padding-bottom: 300px; text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 300px;
+            text-align: center;
+        }
+
+        /* PHẦN TIÊU ĐỀ MỚI */
+        .main-title {
+            color: #588157;
+            font-size: 2.2rem;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+            font-weight: bold;
         }
 
         .thank-you-message {
             background: rgba(255, 255, 255, 0.9);
-            padding: 25px; border-radius: 20px;
-            line-height: 1.6; font-size: 1.05rem;
-            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+            border-radius: 20px;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .container {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
         .media-item {
-            background: #fff; padding: 5px; border-radius: 12px;
+            background: #fff;
+            padding: 5px;
+            border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .media-item video, .media-item img {
-            width: 100%; height: 180px; object-fit: cover; border-radius: 8px;
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
         .timeline-box {
-            position: fixed; bottom: 180px; left: 50%;
-            transform: translateX(-50%); z-index: 10;
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
             background: rgba(255, 255, 255, 0.95);
-            padding: 15px 25px; border-radius: 15px;
-            width: 85%; max-width: 350px; text-align: center;
-            border: 1px solid #a3b18a; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 15px 25px;
+            border-radius: 15px;
+            width: 85%;
+            max-width: 350px;
+            text-align: center;
+            border: 1px solid #a3b18a;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* PHẦN MOOD MUSIC BẠN CẦN */
         .mood-box {
-            position: fixed; bottom: 120px; left: 50%;
-            transform: translateX(-50%); z-index: 11;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 5px 20px; border-radius: 20px;
-            font-size: 0.9rem; font-weight: bold; color: #333;
+            position: fixed;
+            bottom: 125px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 11;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .music-controls {
-            position: fixed; bottom: 40px; left: 50%;
-            transform: translateX(-50%); display: flex;
-            align-items: center; gap: 20px; z-index: 100;
-            background: #1e272e; padding: 12px 25px; border-radius: 50px;
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 100;
+            background: #1e272e;
+            padding: 12px 25px;
+            border-radius: 50px;
         }
 
         .btn-neon {
-            background: transparent; border: 2px solid var(--neon-cyan);
-            color: var(--neon-cyan); width: 45px; height: 45px;
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; cursor: pointer;
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
             box-shadow: 0 0 10px var(--neon-cyan);
         }
 
         #playBtn { width: 55px; height: 55px; font-size: 22px; }
 
         .broken-heart {
-            position: fixed; bottom: -50px; font-size: 24px;
-            user-select: none; pointer-events: none; z-index: 2;
+            position: fixed;
+            bottom: -50px;
+            font-size: 24px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 2;
             animation: flyUp linear forwards;
         }
 
@@ -104,6 +165,8 @@
 <div class="overlay"></div>
 
 <div class="content">
+    <h1 class="main-title">THE LAST CHAPTER</h1>
+
     <div class="thank-you-message">
         Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔. Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc, tìm được người xứng đáng biết trân trọng em hơn anh nhé!!!
     </div>
@@ -147,9 +210,13 @@
 
     function togglePlay() {
         if (!music.src) music.src = tracks[currentTrack];
+        
         if (music.paused) {
-            music.play().then(() => { playBtn.innerHTML = "||"; })
-            .catch(err => { alert("Hãy bấm vào nút Play để nghe nhạc!"); });
+            music.play().then(() => {
+                playBtn.innerHTML = "||";
+            }).catch(err => {
+                console.log("Cần tương tác để phát nhạc");
+            });
         } else {
             music.pause();
             playBtn.innerHTML = "▶";
