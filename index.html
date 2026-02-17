@@ -1,201 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I LOVE YOU</title>
+    <title>THE LAST CHAPTER</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-image: url('assets/images/IMG9.jpg');
+            /* Nền trái tim tan vỡ/đen */
+            background: #000 url('https://images.unsplash.com/photo-1518112391480-98316dabc812?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            font-family: Arial, sans-serif;
-            color: #fff;
-            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Làm tối nền để nổi bật nội dung */
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .thank-you-message {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 30px;
-            box-sizing: border-box;
+            gap: 15px;
+            margin-bottom: 150px;
         }
 
         .media-item {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px;
             border-radius: 10px;
-            overflow: hidden;
         }
 
         .media-item video, .media-item img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
-        .timer {
+        .timeline-box {
             position: fixed;
-            bottom: 150px;
+            bottom: 130px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 1.4rem;
-            font-weight: bold;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            text-align: center;
             z-index: 10;
+            width: 80%;
+            max-width: 400px;
         }
+
+        .timeline-box div {
+            margin: 5px 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .begin { color: #81a1c1; }
+        .end { color: #bf616a; }
 
         .music-controls {
             position: fixed;
-            bottom: 50px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            align-items: center;
             gap: 20px;
             z-index: 20;
         }
 
         .music-controls button {
-            background-color: #333;
+            background: #222;
             color: #fff;
-            border: none;
-            padding: 10px;
+            border: 1px solid #444;
+            padding: 12px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 18px;
-        }
-
-        .heart {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background-image: url('assets/images/IMG11.jpg');
-            background-size: cover;
-            animation: floatHeart 5s ease-in-out infinite;
-        }
-
-        @keyframes floatHeart {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-300px); opacity: 0; }
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
-    <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
-    <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memory 1"></div>
-    <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memory 2"></div>
+<div class="overlay"></div>
+
+<div class="content">
+    <div class="thank-you-message">
+        Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔
+    </div>
+
+    <div class="container">
+        <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
+        <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
+        <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memory 1"></div>
+        <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memory 2"></div>
+    </div>
 </div>
 
-<!-- Đồng hồ thời gian -->
-<div class="timer" id="timer"></div>
+<div class="timeline-box">
+    <div class="begin">The begin: 16/11/2024</div>
+    <div class="end">
+        The end: 28/12/2025<br>
+        <small>(Tức 09/11 Ất Tỵ)</small>
+    </div>
+</div>
 
-<!-- Điều khiển nhạc -->
 <div class="music-controls">
-    <button id="prevBtn">⏮️</button>
-    <button id="playPauseBtn" class="play-pause">▶️</button>
-    <button id="nextBtn">⏭️</button>
+    <button onclick="prevTrack()">⏮️</button>
+    <button id="playBtn" onclick="togglePlay()">▶️</button>
+    <button onclick="nextTrack()">⏭️</button>
 </div>
 
-<!-- Audio -->
-<audio id="bgMusic" loop>
+<audio id="bgMusic" onended="nextTrack()">
     <source src="assets/music/MP4.mp3" type="audio/mp3">
-    <source src="assets/music/MP5.mp3" type="audio/mp3">
-    <source src="assets/music/MP6.mp3" type="audio/mp3">
-    <source src="assets/music/MP7.mp3" type="audio/mp3">
 </audio>
 
 <script>
-    const timer = document.getElementById("timer");
-    const startDate = new Date("2024-11-16T00:00:00");
-
-    function updateTime() {
-        const now = new Date();
-        const diff = now - startDate;
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        timer.innerHTML = `${days} days | ${hours}h | ${minutes}m | ${seconds}s`;
-    }
-
-    setInterval(updateTime, 1000);
-
-    const bgMusic = document.getElementById("bgMusic");
-    const playPauseBtn = document.getElementById("playPauseBtn");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-
-    let isPlaying = false;
-    let currentTrack = 0;
+    const music = document.getElementById("bgMusic");
+    const playBtn = document.getElementById("playBtn");
     const tracks = [
         "assets/music/MP4.mp3",
         "assets/music/MP5.mp3",
         "assets/music/MP6.mp3",
         "assets/music/MP7.mp3"
     ];
+    let currentTrack = 0;
 
-    function playMusic() {
-        bgMusic.src = tracks[currentTrack];
-        bgMusic.play();
-        isPlaying = true;
-        playPauseBtn.innerHTML = "⏸️";
+    function togglePlay() {
+        if (music.paused) {
+            music.play();
+            playBtn.innerHTML = "⏸️";
+        } else {
+            music.pause();
+            playBtn.innerHTML = "▶️";
+        }
     }
 
-    function pauseMusic() {
-        bgMusic.pause();
-        isPlaying = false;
-        playPauseBtn.innerHTML = "▶️";
+    function loadTrack(index) {
+        currentTrack = index;
+        music.src = tracks[currentTrack];
+        music.play();
+        playBtn.innerHTML = "⏸️";
     }
 
-    playPauseBtn.addEventListener("click", () => {
-        isPlaying ? pauseMusic() : playMusic();
-    });
-
-    prevBtn.addEventListener("click", () => {
-        currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-        playMusic();
-    });
-
-    nextBtn.addEventListener("click", () => {
+    function nextTrack() {
         currentTrack = (currentTrack + 1) % tracks.length;
-        playMusic();
-    });
-
-    bgMusic.addEventListener("ended", () => {
-        nextBtn.click();
-    });
-
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.animationDuration = 3 + Math.random() * 2 + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
+        loadTrack(currentTrack);
     }
 
-    setInterval(createHeart, 1000);
+    function prevTrack() {
+        currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+        loadTrack(currentTrack);
+    }
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
