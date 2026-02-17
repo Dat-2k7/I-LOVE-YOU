@@ -7,27 +7,26 @@
     <style>
         :root {
             --neon-cyan: #00cec9;
+            --sad-red: #ff7675;
         }
 
         body {
             margin: 0;
             padding: 0;
+            /* Nền bơ buồn lặp lại */
             background-color: #d4e09b;
-            /* 1. SỬA NỀN BƠ: Đảm bảo đường dẫn này khớp với file bạn up */
-            background-image: url('Gemini_Generated_Image_k1negnk1negnk1ne.png');
-            background-size: 200px;
-            background-repeat: repeat;
+            background-image: url('assets/Gemini_Generated_Image_k1negnk1negnk1ne.png');
+            background-size: 220px;
             font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
             min-height: 100vh;
         }
 
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* 2. SỬA LỖI MÀU XANH: Giảm độ mờ từ 0.88 xuống 0.3 để thấy ảnh bơ bên dưới */
-            background: rgba(212, 224, 155, 0.3); 
+            background: rgba(212, 224, 155, 0.88); 
             z-index: 0;
-            pointer-events: none; /* Để không chặn bấm nút */
         }
 
         .content {
@@ -36,91 +35,128 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            padding-bottom: 300px;
+            padding-bottom: 280px; 
             text-align: center;
         }
 
         .thank-you-message {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 20px;
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 25px;
+            border-radius: 20px;
             line-height: 1.6;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
         .media-item {
             background: #fff;
             padding: 5px;
-            border-radius: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .media-item video, .media-item img {
             width: 100%;
-            height: 150px;
+            height: 180px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 8px;
         }
 
         .timeline-box {
             position: fixed;
-            bottom: 160px;
+            bottom: 150px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
-            background: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 320px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px;
+            border-radius: 15px;
+            width: 85%;
+            max-width: 380px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #a3b18a;
             text-align: center;
+        }
+
+        .timeline-box div { margin: 5px 0; font-weight: bold; }
+        .begin { color: #588157; }
+        .end { color: #bc4749; }
+
+        .mood-label {
+            position: fixed;
+            bottom: 105px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #2d3436;
         }
 
         .music-controls {
             position: fixed;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             z-index: 100;
             background: #1e272e;
-            padding: 10px 20px;
-            border-radius: 40px;
+            padding: 12px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .btn-neon {
+            background: transparent;
             border: 2px solid var(--neon-cyan);
             color: var(--neon-cyan);
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 0 8px var(--neon-cyan);
+            transition: 0.3s;
+            box-shadow: 0 0 10px var(--neon-cyan), inset 0 0 5px var(--neon-cyan);
+            font-weight: bold;
         }
 
-        #playBtn { width: 50px; height: 50px; font-size: 20px; }
+        .btn-neon:hover {
+            background: var(--neon-cyan);
+            color: #fff;
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        #playBtn { width: 55px; height: 55px; font-size: 22px; }
 
         .broken-heart {
             position: fixed;
             bottom: -50px;
-            font-size: 24px;
+            font-size: 22px;
+            user-select: none;
+            pointer-events: none;
             z-index: 2;
             animation: flyUp linear forwards;
         }
 
         @keyframes flyUp {
-            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -130,51 +166,51 @@
 
 <div class="content">
     <div class="thank-you-message">
-        Cảm ơn Heo đã cho anh biết thế nào là yêu... Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc!!! 😔💔
+        Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔. Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc, tìm được người xứng đáng biết trân trọng em hơn anh nhé!!! 
     </div>
 
     <div class="container">
         <div class="media-item"><video src="assets/videos/MP1.mp4" controls></video></div>
         <div class="media-item"><video src="assets/videos/MP6.mp4" controls></video></div>
-        <div class="media-item"><img src="assets/images/IMG1.jpg"></div>
-        <div class="media-item"><img src="assets/images/IMG2.jpg"></div>
+        <div class="media-item"><img src="assets/images/IMG1.jpg" alt="Memory 1"></div>
+        <div class="media-item"><img src="assets/images/IMG2.jpg" alt="Memory 2"></div>
     </div>
 </div>
 
 <div class="timeline-box">
-    <div style="color: #588157;">The begin: 16/11/2024</div>
-    <div style="color: #bc4749;">The end: 28/12/2025</div>
+    <div class="begin">The begin: 16/11/2024</div>
+    <div class="end">The end: 28/12/2025</div>
+    <div style="font-size: 0.85rem; color: #666;">(Cả dương và âm đều đặc biệt)</div>
 </div>
+
+<div class="mood-label">Mood: Sad Lofi 😟</div>
 
 <div class="music-controls">
-    <div class="btn-neon" onclick="prevTrack()">❮</div>
-    <div class="btn-neon" id="playBtn" onclick="togglePlay()">▶</div>
-    <div class="btn-neon" onclick="nextTrack()">❯</div>
+    <button class="btn-neon" onclick="prevTrack()">❮</button>
+    <button class="btn-neon" id="playBtn" onclick="togglePlay()">▶</button>
+    <button class="btn-neon" onclick="nextTrack()">❯</button>
 </div>
 
-<audio id="bgMusic"></audio>
+<audio id="bgMusic" onended="nextTrack()">
+    <source src="assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a" type="audio/mp4">
+</audio>
 
 <script>
     const music = document.getElementById("bgMusic");
     const playBtn = document.getElementById("playBtn");
-
-    /* 3. SỬA LỖI NHẠC: Copy chính xác tên file từ GitHub của bạn */
+    
+    // Danh sách nhạc
     const tracks = [
-        "Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a",
-        "QUANG ĐĂNG TRẦN - ANH ĐÃ KHÔNG BIẾT CÁCH YÊU EM _ Official Lyrics Video.mp3"
+        "assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a",
+        "assets/music/QUANG ĐĂNG TRẦN - ANH ĐÃ KHÔNG BIẾT CÁCH YÊU EM _ Official Lyrics Video.mp3"
     ];
-
+    
     let currentTrack = 0;
-    music.src = tracks[currentTrack];
 
     function togglePlay() {
         if (music.paused) {
-            // Quan trọng: Trình duyệt chỉ cho phát khi bạn bấm nút này
-            music.play().then(() => {
-                playBtn.innerHTML = "||";
-            }).catch(err => {
-                alert("Lỗi: Không tìm thấy file nhạc hoặc trình duyệt chặn!");
-            });
+            music.play();
+            playBtn.innerHTML = "||";
         } else {
             music.pause();
             playBtn.innerHTML = "▶";
@@ -198,15 +234,18 @@
         loadTrack(currentTrack);
     }
 
-    setInterval(() => {
+    // Tạo trái tim vỡ màu đỏ bay lên
+    function createBrokenHeart() {
         const heart = document.createElement("div");
         heart.className = "broken-heart";
         heart.innerHTML = "💔"; 
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
-    }, 600);
+        setTimeout(() => heart.remove(), 7000);
+    }
+    
+    setInterval(createBrokenHeart, 600);
 </script>
 
 </body>
