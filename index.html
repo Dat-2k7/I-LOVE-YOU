@@ -35,7 +35,7 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            padding-bottom: 280px; /* Chừa chỗ cho timeline và controls */
+            padding-bottom: 280px; 
             text-align: center;
         }
 
@@ -50,7 +50,6 @@
             border: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* Bố cục 2 cột giữ nguyên như ban đầu */
         .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -72,7 +71,6 @@
             border-radius: 8px;
         }
 
-        /* Timeline Box */
         .timeline-box {
             position: fixed;
             bottom: 150px;
@@ -86,13 +84,13 @@
             max-width: 380px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border: 1px solid #a3b18a;
+            text-align: center;
         }
 
         .timeline-box div { margin: 5px 0; font-weight: bold; }
         .begin { color: #588157; }
         .end { color: #bc4749; }
 
-        /* Mood Label */
         .mood-label {
             position: fixed;
             bottom: 105px;
@@ -107,7 +105,6 @@
             color: #2d3436;
         }
 
-        /* Nút âm thanh Neon Cyan */
         .music-controls {
             position: fixed;
             bottom: 30px;
@@ -147,7 +144,6 @@
 
         #playBtn { width: 55px; height: 55px; font-size: 22px; }
 
-        /* Trái tim vỡ màu ĐỎ bay lên */
         .broken-heart {
             position: fixed;
             bottom: -50px;
@@ -170,7 +166,7 @@
 
 <div class="content">
     <div class="thank-you-message">
-        Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔.  Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc, tìm được người xứng đáng biết trân trọng em hơn anh nhé!!! 
+        Cảm ơn Heo đã cho anh biết thế nào là yêu, đối với anh đó là khoảng thời gian rất đẹp và rất hạnh phúc. Anh đã phải suy nghĩ rất nhiều và đã đúc kết và hiểu thấm thía câu "Có không giữ mất đừng tìm" có được rất khó là cả quá trình khi đã được thành quả thì tự phá bỏ 😔💔. Anh thành thật xin lỗi và chúc Heo sẽ hạnh phúc, tìm được người xứng đáng biết trân trọng em hơn anh nhé!!! 
     </div>
 
     <div class="container">
@@ -196,16 +192,19 @@
 </div>
 
 <audio id="bgMusic" onended="nextTrack()">
-    <source src="assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a" type="audio/mp3">
+    <source src="assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a" type="audio/mp4">
 </audio>
 
 <script>
     const music = document.getElementById("bgMusic");
     const playBtn = document.getElementById("playBtn");
-    const tracks = ["assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a",
+    
+    // Danh sách nhạc
+    const tracks = [
+        "assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a",
         "assets/music/QUANG ĐĂNG TRẦN - ANH ĐÃ KHÔNG BIẾT CÁCH YÊU EM _ Official Lyrics Video.mp3"
     ];
-    let currentTrack = 0;"];
+    
     let currentTrack = 0;
 
     function togglePlay() {
@@ -245,6 +244,7 @@
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 7000);
     }
+    
     setInterval(createBrokenHeart, 600);
 </script>
 
