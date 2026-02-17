@@ -15,8 +15,8 @@
             padding: 0;
             /* Nền bơ buồn lặp lại */
             background-color: #d4e09b;
-            background-image: url('https://img.freepik.com/free-vector/cute-sad-avocado-cartoon-vector-icon-illustration-food-nature-icon-concept-isolated-premium-flat_138676-4198.jpg');
-            background-size: 120px;
+            background-image: url('assets/Gemini_Generated_Image_k1negnk1negnk1ne.png');
+            background-size: 220px;
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
@@ -196,13 +196,16 @@
 </div>
 
 <audio id="bgMusic" onended="nextTrack()">
-    <source src="assets/music/MP4.mp3" type="audio/mp3">
+    <source src="assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a" type="audio/mp3">
 </audio>
 
 <script>
     const music = document.getElementById("bgMusic");
     const playBtn = document.getElementById("playBtn");
-    const tracks = ["assets/music/MP4.mp3", "assets/music/MP5.mp3"];
+    const tracks = ["assets/music/Đừng Nói - Đình Dũng [LYRIC VIDEO] #DN.mp3.m4a",
+        "assets/music/QUANG ĐĂNG TRẦN - ANH ĐÃ KHÔNG BIẾT CÁCH YÊU EM _ Official Lyrics Video.mp3"
+    ];
+    let currentTrack = 0;"];
     let currentTrack = 0;
 
     function togglePlay() {
